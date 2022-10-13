@@ -50,6 +50,6 @@ function renderCountrisData(counties) {
 function onFetchError(error) {
   refs.countryListCntainer.innerHTML = '';
   refs.countryInfoCntainer.innerHTML = '';
-  //   console.log('err', error);
+
   Notify.failure(`Oops, there is no country with that name`);
 }
