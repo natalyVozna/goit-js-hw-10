@@ -1,7 +1,9 @@
 import './css/styles.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import debounce from 'lodash.debounce';
-import { fetchCountries } from './js/fetchCountries';
+import { fetchCountries } from './js/fetchCountries.js';
+import createCountryInfoCard from './js/country-info-card.js';
+import createCountryListCard from './js/country-list-card.js';
 
 const DEBOUNCE_DELAY = 300;
 
@@ -11,7 +13,7 @@ const refs = {
   inputEl: document.querySelector('input#search-box'),
 };
 
-// inputEl.focus();
+refs.inputEl.focus();
 refs.inputEl.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 
 function onSearch(e) {
@@ -25,7 +27,7 @@ function onSearch(e) {
 }
 
 function renderCountrisData(counties) {
-  console.log(counties);
+  //   console.log(counties);
   if (counties.length > 11) {
     refs.countryListCntainer.innerHTML = '';
     refs.countryInfoCntainer.innerHTML = '';
@@ -33,35 +35,15 @@ function renderCountrisData(counties) {
   } else if (counties.length > 1 && counties.length <= 10) {
     refs.countryInfoCntainer.innerHTML = '';
     const markup = counties
-      .map(({ flags, name }) => {
-        return `<li class='country-card'>
-                <div class='country-img'><img src='${flags.svg}' alt='${name.official}'/></div>
-                <p class='country-name'>${name.common}</p>
-      </li>`;
-      })
+      .map(country => createCountryListCard(country))
       .join('');
 
     refs.countryListCntainer.innerHTML = markup;
   } else {
     refs.countryListCntainer.innerHTML = '';
     const markup = counties
-      .map(({ flags, name, capital, languages, population }) => {
-        const languagesList = Object.values(languages).join(', ');
-
-        return `<div class='country-card'>
-                <div class='country-img'><img src='${flags.svg}' alt='${name.official}'/></div>
-                <p class='country-title'>${name.common}</p>
-        </div>
-        <p class='card-onfo'>
-        <strong>Capinal:</strong> ${capital[0]}</p>
-        <p class='card-onfo'><strong>Population:</strong> ${population}</p>
-        <p class='card-onfo'><strong>Languages:</strong> ${languagesList}</p>
-        `;
-      })
+      .map(country => createCountryInfoCard(country))
       .join('');
-
-    console.log(' markup', markup);
-
     refs.countryInfoCntainer.innerHTML = markup;
   }
 }
@@ -69,5 +51,6 @@ function renderCountrisData(counties) {
 function onFetchError(error) {
   refs.countryListCntainer.innerHTML = '';
   refs.countryInfoCntainer.innerHTML = '';
+  //   console.log('err', error);
   Notify.failure(`Oops, there is no country with that name`);
 }
