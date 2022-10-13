@@ -27,7 +27,6 @@ function onSearch(e) {
 }
 
 function renderCountrisData(counties) {
-  //   console.log(counties);
   if (counties.length > 11) {
     refs.countryListCntainer.innerHTML = '';
     refs.countryInfoCntainer.innerHTML = '';
