@@ -18,3 +18,58 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+p {
+  margin: 0;
+}
+.country-list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 10px;
+  max-width: 300px;
+}
+.country-card {
+  display: flex;
+  align-items: center;
+}
+.country-info .country-card {
+  margin-bottom: 30px;
+}
+
+.country-name {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: black;
+  font-size: 20px;
+}
+
+.country-title {
+  color: black;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.card-onfo {
+  color: black;
+  font-size: 20px;
+  margin-top: 15px;
+}
+
+.country-img {
+  display: flex;
+  align-items: center;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+.country-img img {
+  max-width: 100%;
+  /* width: 100%; */
+  height: auto;
+  display: block;
+}
