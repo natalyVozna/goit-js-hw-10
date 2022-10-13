@@ -67,6 +67,7 @@ function renderCountrisData(counties) {
 }
 
 function onFetchError(error) {
-  console.log('ERROR', error);
+  refs.countryListCntainer.innerHTML = '';
+  refs.countryInfoCntainer.innerHTML = '';
   Notify.failure(`Oops, there is no country with that name`);
 }
